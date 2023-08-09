@@ -1,16 +1,24 @@
+"use client"
+
 import { useRouter } from "next/router"
-import Image from 'next/image'
+import Image from "next/image"
 
 import { AnimatePresence, motion } from "framer-motion"
 import { BiLogIn } from "react-icons/bi"
-import { AiOutlineHome, AiOutlineUserAdd } from 'react-icons/ai'
+import { AiOutlineHome, AiOutlineUserAdd } from "react-icons/ai"
 
 import useHamburgerMenu from "~/hooks/useHamburgerMenu"
-import { Button } from "../Button"
+import { Button } from "../ui/Button"
 import { DropdownContainer } from "./DropdownContainer"
 import { DropdownItem } from "./DropdownItem"
+import supabase from "~/utils/supabaseClient"
+import { useEffect, useState } from "react"
+import useUserStore from "~/store/useUserStore"
 
 export function Navbar() {
+
+  const userStore = useUserStore()
+
   const navLinks = [
     {
       label: "Home",
@@ -30,13 +38,27 @@ export function Navbar() {
 
   const router = useRouter()
 
+  useEffect(() => {
+
+    const getProfilePicture = async () => {
+      const { data } = await supabase.from("users").select("profile_picture_url").eq("userId", userStore.userId)
+      if (data) {
+        userStore.setProfilePictureUrl(data[0]?.["profile_picture_url"])
+      }
+    }
+
+    if (userStore.profilePictureUrl) {
+      getProfilePicture()
+    }
+  }, [userStore.profilePictureUrl])
+
   return (
     <nav className="flex items-center justify-between px-4 py-2 tablet:px-6 laptop:px-8">
       {/* LOGO */}
       <h1 className="text-5xl font-bold text-gray-300">Logo</h1>
 
       {/* Nav-links */}
-      <ul className="hidden tablet:flex justify-between items-center gap-x-4">
+      <ul className="hidden items-center justify-between gap-x-4 tablet:flex">
         {navLinks.map(navLink => (
           <li key={navLink.href}>
             <Button
@@ -50,11 +72,20 @@ export function Navbar() {
       </ul>
 
       {/* HAMBURDER-ICON */}
-      <DropdownContainer className="w-[200px] top-[47.5px]"
-        icon={<Image className="rounded-full" src={'/placeholder.jpg'} width={32} height={32} alt='profile_picture_url' />}>
-        <DropdownItem icon={AiOutlineHome} label="Home" onClick={() => router.push('/profile')} />
-        <DropdownItem icon={BiLogIn} label="Login" onClick={() => router.push('/login')} />
-        <DropdownItem icon={AiOutlineUserAdd} label="Register" onClick={() => router.push('/register')} />
+      <DropdownContainer
+        className="top-[47.5px] w-[200px]"
+        icon={
+          <Image
+            className="rounded-full w-[32px] h-[32px]"
+            src={userStore.profilePictureUrl ? userStore.profilePictureUrl : "/placeholder.jpg"}
+            width={32}
+            height={32}
+            alt="profile_picture_url"
+          />
+        }>
+        <DropdownItem icon={AiOutlineHome} label="Home" onClick={() => router.push("/profile")} />
+        <DropdownItem icon={BiLogIn} label="Login" onClick={() => router.push("/login")} />
+        <DropdownItem icon={AiOutlineUserAdd} label="Register" onClick={() => router.push("/register")} />
       </DropdownContainer>
 
       {/* HAMBURDER-MENU */}

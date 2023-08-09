@@ -20,8 +20,9 @@ export default {
         secondary: "#6B7280", //bg-gray-500
         "secondary-dark": "#4c515c",
         cta: "rgba(254, 14, 0)",
-        "cta-danger": "rgba(197, 52, 52, 1)",
-        "cta-success": "rgba(58, 184, 63, 1)",
+        "danger": "rgba(197, 52, 52, 1)",
+        "success": "rgba(58, 184, 63, 1)",
+        
       }
     },
   },
