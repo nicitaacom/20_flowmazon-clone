@@ -5,7 +5,6 @@ import { formatPrice } from "@/lib/db/format"
 
 export const metadata = {
   title:"Your Cart - Flowmazon"
-
 }
 
 export default async function CartPage() {
