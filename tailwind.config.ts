@@ -21,7 +21,7 @@ daisyui: {
           warning: "#f79926",
           error: "#ea535a",
           body: {
-            "background-color": "#e3e6e6",
+            "background-color": "#202020",
           },
         },
       },
