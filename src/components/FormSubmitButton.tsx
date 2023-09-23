@@ -16,6 +16,7 @@ export default function FormSubmitButton({children,className,...props}:FormSubmi
     <button {...props} className={`btn btn-primary ${className}`} type="submit" disabled={pending}>
       {pending && <span className="loading loading-spinner"/>}
       {children}
+      
       </button>
   )
 }
