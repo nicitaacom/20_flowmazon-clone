@@ -21,12 +21,14 @@ export const metadata = {
       throw Error("Missing required fields")
     }
 
-    await prisma.product.create({
-      data:{name,description,imageUrl,price}
-    })
+
+
+  
 
     redirect('/')
   }
+
+
 
 
 export default async function AddProductPage() {
