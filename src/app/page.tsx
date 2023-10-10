@@ -9,6 +9,8 @@ interface HomeProps {
   searchParams:{page:string}
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home({searchParams:{page='1'}}:HomeProps) {
 const currentPage = parseInt(page)
 
