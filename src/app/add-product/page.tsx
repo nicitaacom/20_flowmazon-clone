@@ -1,8 +1,7 @@
 import FormSubmitButton from "@/components/FormSubmitButton"
-import { prisma } from "@/lib/db/prisma"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
-import { authOptions } from "../api/auth/[...nextauth]/route"
+import { authOptions } from "@/../auth"
 
 export const metadata = {
   title:"Add product - Flowmazon"
@@ -21,9 +20,6 @@ export const metadata = {
       throw Error("Missing required fields")
     }
 
-
-
-  
 
     redirect('/')
   }
