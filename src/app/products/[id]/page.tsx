@@ -49,7 +49,6 @@ export default async function Page({params:{id}}:ProductPageProps) {
       <PriceTag className="mt-4" price={product.price}/>
       <p className="p-6">{product.description}</p>
       <AddToCartButton productId={product.id} incrementProductQuantity={incrementProductQuantity}/>
-      
     </div>
     </div>
   )

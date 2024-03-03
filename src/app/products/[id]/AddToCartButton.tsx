@@ -21,8 +21,8 @@ return (
     setIsSuccess(true)
   })
   }}>
-Add to Cart
- <svg
+  Add to Cart
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-5 w-5"
           fill="none"
@@ -40,5 +40,5 @@ Add to Cart
 {isPending && <span className="loading lodaing-spinner loading-md"/>}
 {!isPending && isSuccess && <span className="text-success text-sm">Added to cart</span>}
   </div>
-)
+  )
 }
